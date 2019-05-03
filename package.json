@@ -1,0 +1,22 @@
+{
+  "name": "eat-at-epfl",
+  "version": "0.0.1",
+  "description": "What to eat at EPFL",
+  "keywords": [
+    "EPFL",
+    "cli",
+    "eat",
+    "food",
+    "meal",
+    "menu"
+  ],
+  "author": "William Belle <william.belle@gmail.com>",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/innovativeinnovation/epfl-menu-api.git",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {}
+}
