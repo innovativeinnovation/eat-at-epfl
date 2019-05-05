@@ -12,20 +12,30 @@
   ],
   "author": "William Belle <william.belle@gmail.com>",
   "license": "Apache-2.0",
-  "repository": "https://github.com/innovativeinnovation/epfl-menu-api.git",
+  "repository": "https://github.com/innovativeinnovation/eat-at-epfl.git",
   "engines": {
     "node": ">=8"
   },
+  "bin": "src/cli.js",
+  "files": [
+    "src/cli.js"
+  ],
   "scripts": {
-    "test": "eslint ."
+    "test": "eslint . && mocha"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^9.0.0",
     "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^6.1.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "epfl-menu-api": "^0.1.0",
+    "yargs": "^13.2.2"
+  }
 }
