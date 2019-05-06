@@ -31,58 +31,79 @@ if (argv.e) {
   opts.partOfDay = 'soir';
 }
 
-epflMenuApi.findMenu(opts).then(function (menus) {
-  put(menus);
+var jsonRestos = epflMenuApi.findResto();
+var jsonMenus = epflMenuApi.findMenu(opts);
+
+Promise.all([jsonRestos, jsonMenus]).then(values => {
+  let listRestoWithPlan = buildListRestoWithPlan(values[0]);
+  let listRestoWithListMenu = buildListRestoWithListMenu(values[1]);
+  put(listRestoWithPlan, listRestoWithListMenu);
 }).catch(function (err) {
   console.log(err);
 });
 
-let put = (menus) => {
-  let list = [];
-  for (let i = 0; i < menus.length; i++) {
-    let resto = menus[i].restoName;
-    if (Array.isArray(list[resto])) {
-      list[resto].push(menus[i]);
+let buildListRestoWithPlan = (jsonRestos) => {
+  let listRestoWithPlan = [];
+  for (let i = 0; i < jsonRestos.length; i++) {
+    let restoName = jsonRestos[i].restoName;
+    listRestoWithPlan[restoName] = jsonRestos[i].plan;
+  }
+  return listRestoWithPlan;
+};
+
+let buildListRestoWithListMenu = (jsonMenus) => {
+  let listRestoWithListMenu = [];
+  for (let i = 0; i < jsonMenus.length; i++) {
+    let restoName = jsonMenus[i].restoName;
+    if (Array.isArray(listRestoWithListMenu[restoName])) {
+      listRestoWithListMenu[restoName].push(jsonMenus[i]);
     } else {
-      list[resto] = [];
-      list[resto].push(menus[i]);
+      listRestoWithListMenu[restoName] = [];
+      listRestoWithListMenu[restoName].push(jsonMenus[i]);
     }
   }
+  return listRestoWithListMenu;
+};
 
-  for (let key in list) {
+let put = (listResto, listMenu) => {
+  for (let key in listMenu) {
     try {
-      console.log(chalk.blue(key));
+      if (listResto[key] !== '') {
+        console.log(chalk.blue(key + ' (' + listResto[key] + ')'));
+      } else {
+        console.log(chalk.blue(key));
+      }
     } catch (err) {
       console.log(key);
     }
-    for (let j = 0; j < list[key].length; j++) {
+    for (let j = 0; j < listMenu[key].length; j++) {
       try {
-        if (list[key][j].platPrincipal !== '') {
+        if (listMenu[key][j].platPrincipal !== '') {
           console.log(
-            '    🍽  ' + chalk.green(list[key][j].platPrincipal)
+            '    🍽  ' + chalk.green(listMenu[key][j].platPrincipal)
           );
         }
-        if (list[key][j].accompLegumes !== '') {
+        if (listMenu[key][j].accompLegumes !== '') {
           console.log(
-            '       ' + chalk.green(list[key][j].accompLegumes)
+            '       ' + chalk.green(listMenu[key][j].accompLegumes)
           );
         }
-        if (list[key][j].accompFeculents !== '') {
+        if (listMenu[key][j].accompFeculents !== '') {
           console.log(
-            '       ' + chalk.green(list[key][j].accompFeculents)
+            '       ' + chalk.green(listMenu[key][j].accompFeculents)
           );
         }
-        if (list[key][j].menuTags !== '') {
+        if (listMenu[key][j].menuTags !== '') {
           console.log(
             '       ' + chalk.yellow('[Tags: ' +
-            list[key][j].menuTags + ']')
+            listMenu[key][j].menuTags + ']')
           );
         }
       } catch (err) {
-        console.log('    ' + list[key][j].platPrincipal);
-        console.log('    ' + list[key][j].accompLegumes);
-        console.log('    ' + list[key][j].accompFeculents);
-        console.log('    [Tags: ' + list[key][j].menuTags + ']');
+        console.log('    ' + listMenu[key][j].platPrincipal);
+        console.log('    ' + listMenu[key][j].accompLegumes);
+        console.log('    ' + listMenu[key][j].accompFeculents);
+        console.log('    [Tags: ' + listMenu[key][j].menuTags + ']');
       }
       console.log('');
     }
