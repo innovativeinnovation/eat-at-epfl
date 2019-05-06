@@ -42,8 +42,9 @@ Usage: eat-at-epfl [options]
 
 Options:
   -e, --evening  Evening menus
-  -h, --help     Show help                [boolean]
-  -v, --version  Show version number      [boolean]
+  -l, --language  Show menus in "en" or "fr"    [string]
+  -h, --help     Show help                     [boolean]
+  -v, --version  Show version number           [boolean]
 
 Examples:
   eat-at-epfl

@@ -15,6 +15,14 @@ const yargs = require('yargs')
     describe: 'Evening menus'
   })
 
+  // Language
+  .option('l', {
+    alias: 'language',
+    describe: 'Show menus in "en" or "fr"',
+    requiresArg: true,
+    type: 'string'
+  })
+
   // Version
   .alias('v', 'version')
 
@@ -27,8 +35,12 @@ const yargs = require('yargs')
 
 let argv = yargs.argv;
 let opts = {};
+opts.language = 'en';
 if (argv.e) {
   opts.partOfDay = 'soir';
+}
+if (argv.l && argv.l === 'fr') {
+  opts.language = 'fr';
 }
 
 var jsonRestos = epflMenuApi.findResto();
