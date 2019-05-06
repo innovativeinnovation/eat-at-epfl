@@ -23,6 +23,14 @@ const yargs = require('yargs')
     type: 'string'
   })
 
+  // Resto ID
+  .option('r', {
+    alias: 'restoId',
+    describe: 'Restaurant ID',
+    requiresArg: true,
+    type: 'number'
+  })
+
   // Version
   .alias('v', 'version')
 
@@ -41,6 +49,14 @@ if (argv.e) {
 }
 if (argv.l && argv.l === 'fr') {
   opts.language = 'fr';
+}
+if (isNaN(argv.r) && argv.r !== undefined) {
+  yargs.showHelp();
+  process.exit(0);
+} else {
+  if (argv.r !== undefined) {
+    opts.restoId = argv.r;
+  }
 }
 
 var jsonRestos = epflMenuApi.findResto();
