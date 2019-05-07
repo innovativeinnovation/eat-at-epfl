@@ -41,6 +41,7 @@ eat-at-epfl -h
 Usage: eat-at-epfl [options]
 
 Options:
+  -d, --date      A date. Example: 18/04/2019             [string]
   -e, --evening   Evening menus
   -l, --language  Show menus in "en" or "fr"              [string]
   -r, --restoId   Restaurant ID                           [number]
@@ -51,7 +52,8 @@ Options:
 Examples:
   eat-at-epfl
   eat-at-epfl -e
-  eat-at-epfl -l fr -t Pizza
+  eat-at-epfl -l fr -t Pizza,Poisson
+  eat-at-epfl --date=04/05/2019
 ```
 
 Screenshot

@@ -6,8 +6,17 @@
  */
 
 const epflMenuApi = require('epfl-menu-api');
+const moment = require('moment');
 const chalk = require('chalk');
 const yargs = require('yargs')
+
+  // Date
+  .option('d', {
+    alias: 'date',
+    describe: 'A date. Example: 18/04/2019',
+    requiresArg: true,
+    type: 'string'
+  })
 
   // Evening
   .option('e', {
@@ -47,7 +56,9 @@ const yargs = require('yargs')
   .alias('h', 'help')
   .usage('Usage: $0 [options]')
   .example('$0')
-  .example('$0 -e');
+  .example('$0 -e')
+  .example('$0 -l fr -t Pizza,Poisson')
+  .example('$0 --date=04/05/2019');
 
 let argv = yargs.argv;
 let opts = {};
@@ -68,6 +79,14 @@ if (isNaN(argv.r) && argv.r !== undefined) {
 }
 if (argv.t) {
   opts.tags = argv.t;
+}
+if (argv.d) {
+  if (moment(argv.d, 'DD/MM/YYYY', true).isValid()) {
+    opts.date = argv.d;
+  } else {
+    yargs.showHelp();
+    process.exit(0);
+  }
 }
 
 var jsonRestos = epflMenuApi.findResto();
