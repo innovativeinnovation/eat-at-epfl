@@ -31,6 +31,14 @@ const yargs = require('yargs')
     type: 'number'
   })
 
+  // Tags
+  .option('t', {
+    alias: 'tags',
+    describe: 'A comma separated list of menu types',
+    requiresArg: true,
+    type: 'string'
+  })
+
   // Version
   .alias('v', 'version')
 
@@ -57,6 +65,9 @@ if (isNaN(argv.r) && argv.r !== undefined) {
   if (argv.r !== undefined) {
     opts.restoId = argv.r;
   }
+}
+if (argv.t) {
+  opts.tags = argv.t;
 }
 
 var jsonRestos = epflMenuApi.findResto();

@@ -42,14 +42,16 @@ Usage: eat-at-epfl [options]
 
 Options:
   -e, --evening   Evening menus
-  -l, --language  Show menus in "en" or "fr"     [string]
-  -r, --restoId   Restaurant ID                  [number]
-  -h, --help      Show help                     [boolean]
-  -v, --version   Show version number           [boolean]
+  -l, --language  Show menus in "en" or "fr"              [string]
+  -r, --restoId   Restaurant ID                           [number]
+  -t, --tags      A comma separated list of menu types    [string]
+  -h, --help      Show help                              [boolean]
+  -v, --version   Show version number                    [boolean]
 
 Examples:
   eat-at-epfl
   eat-at-epfl -e
+  eat-at-epfl -l fr -t Pizza
 ```
 
 Screenshot
