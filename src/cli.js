@@ -123,47 +123,46 @@ let buildListRestoWithListMenu = (jsonMenus) => {
   return listRestoWithListMenu;
 };
 
+let buildRestoLine = (name, location) => {
+  let line = name;
+  if (location !== '') {
+    line += ' (' + location + ')';
+  }
+  return line;
+};
+
+let BuildMenuLines = (name, pos, listMenu) => {
+  let line = '';
+  let menuPart = ['platPrincipal', 'accompFeculents', 'accompLegumes'];
+  for (let k = 0; k < menuPart.length; k++) {
+    if (listMenu[name][pos][menuPart[k]] !== '') {
+      if (menuPart[k] === 'platPrincipal') {
+        line += '    🍽  ';
+      } else {
+        line += '       ';
+      }
+      line += listMenu[name][pos][menuPart[k]] + '\n';
+    }
+  }
+  return line;
+};
+
+let BuildTagsLine = (name, pos, listMenu) => {
+  let line = '';
+  if (listMenu[name][pos].menuTags !== '') {
+    line += '      [Tags: ' + listMenu[name][pos].menuTags + ']\n';
+  }
+  return line;
+};
+
 let put = (listResto, listMenu) => {
   for (let key in listMenu) {
-    try {
-      if (listResto[key] !== '') {
-        console.log(chalk.blue(key + ' (' + listResto[key] + ')'));
-      } else {
-        console.log(chalk.blue(key));
-      }
-    } catch (err) {
-      console.log(key);
-    }
+    console.log(chalk.blue(buildRestoLine(key, listResto[key])));
     for (let j = 0; j < listMenu[key].length; j++) {
-      try {
-        if (listMenu[key][j].platPrincipal !== '') {
-          console.log(
-            '    🍽  ' + chalk.green(listMenu[key][j].platPrincipal)
-          );
-        }
-        if (listMenu[key][j].accompLegumes !== '') {
-          console.log(
-            '       ' + chalk.green(listMenu[key][j].accompLegumes)
-          );
-        }
-        if (listMenu[key][j].accompFeculents !== '') {
-          console.log(
-            '       ' + chalk.green(listMenu[key][j].accompFeculents)
-          );
-        }
-        if (listMenu[key][j].menuTags !== '') {
-          console.log(
-            '       ' + chalk.yellow('[Tags: ' +
-            listMenu[key][j].menuTags + ']')
-          );
-        }
-      } catch (err) {
-        console.log('    ' + listMenu[key][j].platPrincipal);
-        console.log('    ' + listMenu[key][j].accompLegumes);
-        console.log('    ' + listMenu[key][j].accompFeculents);
-        console.log('    [Tags: ' + listMenu[key][j].menuTags + ']');
-      }
-      console.log('');
+      console.log(
+        chalk.green(BuildMenuLines(key, j, listMenu)),
+        chalk.yellow(BuildTagsLine(key, j, listMenu))
+      );
     }
   }
 };
