@@ -150,7 +150,11 @@ let BuildMenuLines = (name, pos, listMenu) => {
 let BuildTagsLine = (name, pos, listMenu) => {
   let line = '';
   if (listMenu[name][pos].menuTags !== '') {
-    line += '      [Tags: ' + listMenu[name][pos].menuTags + ']\n';
+    let tags = listMenu[name][pos].menuTags;
+    if (argv.l !== 'fr') {
+      tags = epflMenuApi.translateTags(tags);
+    }
+    line += '      [Tags: ' + tags + ']\n';
   }
   return line;
 };
