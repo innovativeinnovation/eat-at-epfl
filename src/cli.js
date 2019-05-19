@@ -104,7 +104,10 @@ let buildListRestoWithPlan = (jsonRestos) => {
   let listRestoWithPlan = [];
   for (let i = 0; i < jsonRestos.length; i++) {
     let restoName = jsonRestos[i].restoName;
-    listRestoWithPlan[restoName] = jsonRestos[i].plan;
+    listRestoWithPlan[restoName] = {
+      location: jsonRestos[i].plan,
+      id: jsonRestos[i].restoID
+    };
   }
   return listRestoWithPlan;
 };
@@ -123,10 +126,10 @@ let buildListRestoWithListMenu = (jsonMenus) => {
   return listRestoWithListMenu;
 };
 
-let buildRestoLine = (name, location) => {
-  let line = name;
-  if (location !== '') {
-    line += ' (' + location + ')';
+let buildRestoLine = (name, listResto) => {
+  let line = listResto[name].id + '. ' + name;
+  if (listResto[name].location !== '') {
+    line += ' (' + listResto[name].location + ')';
   }
   return line;
 };
@@ -161,7 +164,7 @@ let BuildTagsLine = (name, pos, listMenu) => {
 
 let put = (listResto, listMenu) => {
   for (let key in listMenu) {
-    console.log(chalk.blue(buildRestoLine(key, listResto[key])));
+    console.log(chalk.blue(buildRestoLine(key, listResto)));
     for (let j = 0; j < listMenu[key].length; j++) {
       console.log(
         chalk.green(BuildMenuLines(key, j, listMenu)),
