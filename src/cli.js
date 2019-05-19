@@ -10,6 +10,12 @@ const moment = require('moment');
 const chalk = require('chalk');
 const yargs = require('yargs')
 
+  // List resto
+  .option('a', {
+    alias: 'all',
+    describe: 'List all restaurants'
+  })
+
   // Date
   .option('d', {
     alias: 'date',
@@ -62,43 +68,73 @@ const yargs = require('yargs')
 
 let argv = yargs.argv;
 let opts = {};
-opts.language = 'en';
-if (argv.e) {
-  opts.partOfDay = 'soir';
-}
-if (argv.l && argv.l === 'fr') {
-  opts.language = 'fr';
-}
-if (isNaN(argv.r) && argv.r !== undefined) {
-  yargs.showHelp();
-  process.exit(0);
+
+if (argv.a) {
+  epflMenuApi.findResto().then(listRestos => {
+    listRestos.sort(sortRestoByName);
+    putListResto(listRestos);
+  });
 } else {
-  if (argv.r !== undefined) {
-    opts.restoId = argv.r;
+  opts.language = 'en';
+  if (argv.e) {
+    opts.partOfDay = 'soir';
   }
-}
-if (argv.t) {
-  opts.tags = argv.t;
-}
-if (argv.d) {
-  if (moment(argv.d, 'DD/MM/YYYY', true).isValid()) {
-    opts.date = argv.d;
-  } else {
+  if (argv.l && argv.l === 'fr') {
+    opts.language = 'fr';
+  }
+  if (isNaN(argv.r) && argv.r !== undefined) {
     yargs.showHelp();
     process.exit(0);
+  } else {
+    if (argv.r !== undefined) {
+      opts.restoId = argv.r;
+    }
   }
+  if (argv.t) {
+    opts.tags = argv.t;
+  }
+  if (argv.d) {
+    if (moment(argv.d, 'DD/MM/YYYY', true).isValid()) {
+      opts.date = argv.d;
+    } else {
+      yargs.showHelp();
+      process.exit(0);
+    }
+  }
+
+  let jsonRestos = epflMenuApi.findResto();
+  let jsonMenus = epflMenuApi.findMenu(opts);
+
+  Promise.all([jsonRestos, jsonMenus]).then(values => {
+    let listRestoWithPlan = buildListRestoWithPlan(values[0]);
+    let listRestoWithListMenu = buildListRestoWithListMenu(values[1]);
+    put(listRestoWithPlan, listRestoWithListMenu);
+  }).catch(function (err) {
+    console.log(err);
+  });
 }
 
-var jsonRestos = epflMenuApi.findResto();
-var jsonMenus = epflMenuApi.findMenu(opts);
+let putListResto = (listResto) => {
+  for (let i = 0; i < listResto.length; i++) {
+    console.log(chalk.blue(buildRestoLine(
+      listResto[i].restoName,
+      listResto[i].plan,
+      listResto[i].restoID
+    )));
+  }
+};
 
-Promise.all([jsonRestos, jsonMenus]).then(values => {
-  let listRestoWithPlan = buildListRestoWithPlan(values[0]);
-  let listRestoWithListMenu = buildListRestoWithListMenu(values[1]);
-  put(listRestoWithPlan, listRestoWithListMenu);
-}).catch(function (err) {
-  console.log(err);
-});
+let sortRestoByName = (a, b) => {
+  let nameA = a.restoName.toUpperCase();
+  let nameB = b.restoName.toUpperCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+};
 
 let buildListRestoWithPlan = (jsonRestos) => {
   let listRestoWithPlan = [];
@@ -126,10 +162,10 @@ let buildListRestoWithListMenu = (jsonMenus) => {
   return listRestoWithListMenu;
 };
 
-let buildRestoLine = (name, listResto) => {
-  let line = listResto[name].id + '. ' + name;
-  if (listResto[name].location !== '') {
-    line += ' (' + listResto[name].location + ')';
+let buildRestoLine = (name, location, id) => {
+  let line = id + '. ' + name;
+  if (location !== '') {
+    line += ' (' + location + ')';
   }
   return line;
 };
@@ -164,7 +200,9 @@ let BuildTagsLine = (name, pos, listMenu) => {
 
 let put = (listResto, listMenu) => {
   for (let key in listMenu) {
-    console.log(chalk.blue(buildRestoLine(key, listResto)));
+    console.log(chalk.blue(buildRestoLine(
+      key, listResto[key].location, listResto[key].id
+    )));
     for (let j = 0; j < listMenu[key].length; j++) {
       console.log(
         chalk.green(BuildMenuLines(key, j, listMenu)),

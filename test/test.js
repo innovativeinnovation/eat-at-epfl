@@ -59,5 +59,10 @@ describe('eat-at-epfl cli', function () {
 
   it('should match "Usage:" with option --date=30/02/2019 -r bo', () => {
     response.should.match(/Usage:/);
+    nextCliOption = ['-a'];
+  });
+
+  it('should match "32. L\'Esplanade (CO160)" with option -a', () => {
+    response.should.match(/32. L'Esplanade \(CO160\)/);
   });
 });

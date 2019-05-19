@@ -41,6 +41,7 @@ eat-at-epfl -h
 Usage: eat-at-epfl [options]
 
 Options:
+  -a, --all       List all restaurants
   -d, --date      A date. Example: 18/04/2019             [string]
   -e, --evening   Evening menus
   -l, --language  Show menus in "en" or "fr"              [string]
