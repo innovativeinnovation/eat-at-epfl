@@ -1,6 +1,12 @@
 Changelog
 =========
 
+### v1.1.0 / 2019-05-19
+
+  - Add cli option `all`
+  - Add tags translation
+  - Display resto id
+
 ### v1.0.0 / 2019-05-16
 
   - Add cli option `date`
