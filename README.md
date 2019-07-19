@@ -11,7 +11,7 @@
     <img alt="Travis Status" src="https://travis-ci.org/innovativeinnovation/eat-at-epfl.svg?branch=master">
   </a>
   <a href="https://david-dm.org/innovativeinnovation/eat-at-epfl">
-    <img alt="Dependency Status" src="https://david-dm.org/innovativeinnovation/eat-at-epfl/status.svg"/>
+    <img alt="Dependencies Status" src="https://david-dm.org/innovativeinnovation/eat-at-epfl/status.svg"/>
   </a>
   <a href="https://raw.githubusercontent.com/innovativeinnovation/eat-at-epfl/master/LICENSE">
     <img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg">
