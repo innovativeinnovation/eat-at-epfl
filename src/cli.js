@@ -66,8 +66,8 @@ const yargs = require('yargs')
   .example('$0 -l fr -t Pizza,Poisson')
   .example('$0 --date=04/05/2019');
 
-let argv = yargs.argv;
-let opts = {};
+const argv = yargs.argv;
+const opts = {};
 
 if (argv.a) {
   epflMenuApi.findResto().then(listRestos => {
@@ -102,19 +102,19 @@ if (argv.a) {
     }
   }
 
-  let jsonRestos = epflMenuApi.findResto();
-  let jsonMenus = epflMenuApi.findMenu(opts);
+  const jsonRestos = epflMenuApi.findResto();
+  const jsonMenus = epflMenuApi.findMenu(opts);
 
   Promise.all([jsonRestos, jsonMenus]).then(values => {
-    let listRestoWithPlan = buildListRestoWithPlan(values[0]);
-    let listRestoWithListMenu = buildListRestoWithListMenu(values[1]);
+    const listRestoWithPlan = buildListRestoWithPlan(values[0]);
+    const listRestoWithListMenu = buildListRestoWithListMenu(values[1]);
     put(listRestoWithPlan, listRestoWithListMenu);
   }).catch(function (err) {
     console.log(err);
   });
 }
 
-let putListResto = (listResto) => {
+const putListResto = (listResto) => {
   for (let i = 0; i < listResto.length; i++) {
     console.log(chalk.blue(buildRestoLine(
       listResto[i].restoName,
@@ -124,9 +124,9 @@ let putListResto = (listResto) => {
   }
 };
 
-let sortRestoByName = (a, b) => {
-  let nameA = a.restoName.toUpperCase();
-  let nameB = b.restoName.toUpperCase();
+const sortRestoByName = (a, b) => {
+  const nameA = a.restoName.toUpperCase();
+  const nameB = b.restoName.toUpperCase();
   if (nameA < nameB) {
     return -1;
   }
@@ -136,10 +136,10 @@ let sortRestoByName = (a, b) => {
   return 0;
 };
 
-let buildListRestoWithPlan = (jsonRestos) => {
-  let listRestoWithPlan = [];
+const buildListRestoWithPlan = (jsonRestos) => {
+  const listRestoWithPlan = [];
   for (let i = 0; i < jsonRestos.length; i++) {
-    let restoName = jsonRestos[i].restoName;
+    const restoName = jsonRestos[i].restoName;
     listRestoWithPlan[restoName] = {
       location: jsonRestos[i].plan,
       id: jsonRestos[i].restoID
@@ -148,10 +148,10 @@ let buildListRestoWithPlan = (jsonRestos) => {
   return listRestoWithPlan;
 };
 
-let buildListRestoWithListMenu = (jsonMenus) => {
-  let listRestoWithListMenu = [];
+const buildListRestoWithListMenu = (jsonMenus) => {
+  const listRestoWithListMenu = [];
   for (let i = 0; i < jsonMenus.length; i++) {
-    let restoName = jsonMenus[i].restoName;
+    const restoName = jsonMenus[i].restoName;
     if (Array.isArray(listRestoWithListMenu[restoName])) {
       listRestoWithListMenu[restoName].push(jsonMenus[i]);
     } else {
@@ -162,7 +162,7 @@ let buildListRestoWithListMenu = (jsonMenus) => {
   return listRestoWithListMenu;
 };
 
-let buildRestoLine = (name, location, id) => {
+const buildRestoLine = (name, location, id) => {
   let line = id + '. ' + name;
   if (location !== '') {
     line += ' (' + location + ')';
@@ -170,9 +170,9 @@ let buildRestoLine = (name, location, id) => {
   return line;
 };
 
-let BuildMenuLines = (name, pos, listMenu) => {
+const BuildMenuLines = (name, pos, listMenu) => {
   let line = '';
-  let menuPart = ['platPrincipal', 'accompFeculents', 'accompLegumes'];
+  const menuPart = ['platPrincipal', 'accompFeculents', 'accompLegumes'];
   for (let k = 0; k < menuPart.length; k++) {
     if (listMenu[name][pos][menuPart[k]] !== '') {
       if (menuPart[k] === 'platPrincipal') {
@@ -186,7 +186,7 @@ let BuildMenuLines = (name, pos, listMenu) => {
   return line;
 };
 
-let BuildTagsLine = (name, pos, listMenu) => {
+const BuildTagsLine = (name, pos, listMenu) => {
   let line = '';
   if (listMenu[name][pos].menuTags !== '') {
     let tags = listMenu[name][pos].menuTags;
@@ -198,8 +198,8 @@ let BuildTagsLine = (name, pos, listMenu) => {
   return line;
 };
 
-let put = (listResto, listMenu) => {
-  for (let key in listMenu) {
+const put = (listResto, listMenu) => {
+  for (const key in listMenu) {
     console.log(chalk.blue(buildRestoLine(
       key, listResto[key].location, listResto[key].id
     )));
