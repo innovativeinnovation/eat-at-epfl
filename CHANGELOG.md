@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### v1.1.2 / 2019-10-06
+
+  - Update dependencies
+
 ### v1.1.1 / 2019-07-20
 
   - Improve documentation
