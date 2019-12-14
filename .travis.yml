@@ -3,10 +3,7 @@
 
 language: node_js
 node_js:
+  - "13"
   - "12"
-  - "11"
   - "10"
   - "8"
-after_success:
-  - npm install coveralls mocha-lcov-reporter
-  - npm run coveralls
