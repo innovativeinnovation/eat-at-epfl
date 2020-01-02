@@ -52,9 +52,9 @@ Options:
 
 Examples:
   eat-at-epfl
-  eat-at-epfl -e
-  eat-at-epfl -l fr -t Pizza,Poisson
-  eat-at-epfl --date=04/05/2019
+  eat-at-epfl -e -l fr
+  eat-at-epfl -t Pizza,Fish
+  eat-at-epfl -d 04/05/2019
 ```
 
 Screenshot

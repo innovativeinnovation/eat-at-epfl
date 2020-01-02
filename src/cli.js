@@ -62,9 +62,9 @@ const yargs = require('yargs')
   .alias('h', 'help')
   .usage('Usage: $0 [options]')
   .example('$0')
-  .example('$0 -e')
-  .example('$0 -l fr -t Pizza,Poisson')
-  .example('$0 --date=04/05/2019');
+  .example('$0 -e -l fr')
+  .example('$0 -t Pizza,Fish')
+  .example('$0 -d 04/05/2019');
 
 const argv = yargs.argv;
 const opts = {};
