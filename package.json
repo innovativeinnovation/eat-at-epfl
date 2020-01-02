@@ -12,9 +12,9 @@
   ],
   "author": "William Belle <william.belle@gmail.com>",
   "license": "Apache-2.0",
-  "repository": "https://github.com/innovativeinnovation/eat-at-epfl.git",
+  "repository": "innovativeinnovation/eat-at-epfl",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "bin": "src/cli.js",
   "files": [
@@ -25,17 +25,17 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^6.2.2"
   },
   "dependencies": {
     "chalk": "^3.0.0",
-    "epfl-menu-api": "^1.1.2",
+    "epfl-menu-api": "^2.0.0",
     "moment": "^2.24.0",
     "yargs": "^15.0.2"
   }
