@@ -1,6 +1,11 @@
 Changelog
 =========
 
+### v2.1.0 / 2020-02-08
+
+  - Add option to pick a random menu
+  - Update dependencies
+
 ### v2.0.0 / 2020-01-02
 
   - Drop support for Node < 10
