@@ -38,6 +38,11 @@ const yargs = require('yargs')
     type: 'string'
   })
 
+  .option('p', {
+    alias: 'pick-random-menu',
+    describe: 'Pick a random menu'
+  })
+
   // Resto ID
   .option('r', {
     alias: 'restoId',
@@ -106,13 +111,22 @@ if (argv.a) {
   const jsonMenus = epflMenuApi.findMenu(opts);
 
   Promise.all([jsonRestos, jsonMenus]).then(values => {
+    let menuList = values[1];
+    if (argv.p && menuList.length > 0) {
+      menuList = getRamdomMenu(values[1]);
+    }
     const listRestoWithPlan = buildListRestoWithPlan(values[0]);
-    const listRestoWithListMenu = buildListRestoWithListMenu(values[1]);
+    const listRestoWithListMenu = buildListRestoWithListMenu(menuList);
     put(listRestoWithPlan, listRestoWithListMenu);
   }).catch(function (err) {
     console.log(err);
   });
 }
+
+const getRamdomMenu = (list) => {
+  const menu = list[Math.floor(Math.random() * list.length)];
+  return [menu];
+};
 
 const putListResto = (listResto) => {
   for (let i = 0; i < listResto.length; i++) {

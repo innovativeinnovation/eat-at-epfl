@@ -41,14 +41,15 @@ eat-at-epfl -h
 Usage: eat-at-epfl [options]
 
 Options:
-  -a, --all       List all restaurants
-  -d, --date      A date. Example: 18/04/2019             [string]
-  -e, --evening   Evening menus
-  -l, --language  Show menus in "en" or "fr"              [string]
-  -r, --restoId   Restaurant ID                           [number]
-  -t, --tags      A comma separated list of menu types    [string]
-  -h, --help      Show help                              [boolean]
-  -v, --version   Show version number                    [boolean]
+  -a, --all               List all restaurants
+  -d, --date              A date. Example: 18/04/2019            [string]
+  -e, --evening           Evening menus
+  -l, --language          Show menus in "en" or "fr"             [string]
+  -p, --pick-random-menu  Pick a random menu
+  -r, --restoId           Restaurant ID                          [number]
+  -t, --tags              A comma separated list of menu types   [string]
+  -h, --help              Show help                             [boolean]
+  -v, --version           Show version number                   [boolean]
 
 Examples:
   eat-at-epfl
@@ -78,7 +79,7 @@ See [Contributing](CONTRIBUTING.md).
 Developer
 ---------
 
-  * [William Belle](https://github.com/williambelle)
+* [William Belle](https://github.com/williambelle)
 
 License
 -------
