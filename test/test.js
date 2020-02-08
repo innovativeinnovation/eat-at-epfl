@@ -29,35 +29,35 @@ describe('eat-at-epfl cli', function () {
 
   it('should match "Usage:" with option --date=30/02/2019', () => {
     response.should.match(/Usage:/);
-    nextCliOption = ['--date=18/04/2019'];
+    nextCliOption = ['--date=07/02/2020'];
   });
 
-  it('should match "Cafétéria BC" with -d 18/04/2019', () => {
+  it('should match "Cafétéria BC" with -d 07/02/2020', () => {
     response.should.match(/Cafétéria BC/);
-    nextCliOption = ['-e', '--date=18/04/2019'];
+    nextCliOption = ['-e', '--date=07/02/2020'];
   });
 
-  it('should match "Shangri-La" with -d 18/04/2019 -e', () => {
+  it('should match "Shangri-La" with -d 07/02/2020 -e', () => {
     response.should.match(/Shangri-La/);
-    nextCliOption = ['-e', '--language=fr', '--date=18/04/2019'];
+    nextCliOption = ['-e', '--language=fr', '--date=07/02/2020'];
   });
 
-  it('should match "Poulet au citron" with -d 18/04/2019 -e -l fr', () => {
-    response.should.match(/Poulet au citron/);
-    nextCliOption = ['--tags=Viande', '--date=18/04/2019'];
+  it('should match "Jambon fumé sauce" with -d 07/02/2020 -e -l fr', () => {
+    response.should.match(/Jambon fumé sauce/);
+    nextCliOption = ['--tags=Viande', '--date=07/02/2020'];
   });
 
-  it('should match "Beef burger" with -d 18/04/2019 -t Viande', () => {
-    response.should.match(/Beef burger/);
-    nextCliOption = ['--restoId=22', '--date=18/04/2019'];
+  it('should match "beef cheeseburger" with -d 07/02/2020 -t Viande', () => {
+    response.should.match(/beef cheeseburger/);
+    nextCliOption = ['--restoId=22', '--date=07/02/2020'];
   });
 
-  it('should match "Le Corbusier" with -r 22 --date=18/04/2019', () => {
+  it('should match "Le Corbusier" with -r 22 --date=07/02/2020', () => {
     response.should.match(/Le Corbusier/);
     nextCliOption = ['--restoId=bo', '--date=18/04/2019'];
   });
 
-  it('should match "Usage:" with option --date=30/02/2019 -r bo', () => {
+  it('should match "Usage:" with option --date=18/04/2019 -r bo', () => {
     response.should.match(/Usage:/);
     nextCliOption = ['-a'];
   });
