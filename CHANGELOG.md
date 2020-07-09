@@ -1,6 +1,11 @@
 Changelog
 =========
 
+### v2.1.1 / 2020-07-09
+
+  - Update dependencies
+  - Test against Node.js 14  
+
 ### v2.1.0 / 2020-02-08
 
   - Add option to pick a random menu
