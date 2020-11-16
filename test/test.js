@@ -29,30 +29,30 @@ describe('eat-at-epfl cli', function () {
 
   it('should match "Usage:" with option --date=30/02/2019', () => {
     response.should.match(/Usage:/);
-    nextCliOption = ['--date=07/07/2020'];
+    nextCliOption = ['--date=10/11/2020'];
   });
 
-  it('should match "Cafétéria BC" with -d 07/07/2020', () => {
+  it('should match "Cafétéria BC" with -d 10/11/2020', () => {
     response.should.match(/Cafétéria BC/);
-    nextCliOption = ['-e', '--date=01/07/2020'];
+    nextCliOption = ['-e', '--date=10/11/2020'];
   });
 
-  it('should match "Shangri-La" with -d 01/07/2020 -e', () => {
-    response.should.match(/Shangri-La/);
-    nextCliOption = ['-e', '--language=fr', '--date=01/07/2020'];
+  it('should match "Sushizen" with -d 10/11/2020 -e', () => {
+    response.should.match(/Sushizen/);
+    nextCliOption = ['-e', '--language=fr', '--date=10/11/2020'];
   });
 
-  it('should match "Nouilles sautées" with -d 01/07/2020 -e -l fr', () => {
-    response.should.match(/Nouilles sautées/);
-    nextCliOption = ['--tags=Viande', '--date=07/07/2020'];
+  it('should match "sauce teriyaki" with -d 10/11/2020 -e -l fr', () => {
+    response.should.match(/sauce teriyaki/);
+    nextCliOption = ['--tags=Viande', '--date=11/11/2020'];
   });
 
-  it('should match "Beef steak" with -d 07/07/2020 -t Viande', () => {
-    response.should.match(/Beef steak/);
-    nextCliOption = ['--restoId=18', '--date=07/07/2020'];
+  it('should match "beef steak" with -d 11/11/2020 -t Viande', () => {
+    response.should.match(/beef steak/);
+    nextCliOption = ['--restoId=18', '--date=12/11/2020'];
   });
 
-  it('should match "Cafétéria BC" with -r 18 --date=07/07/2020', () => {
+  it('should match "Cafétéria BC" with -r 18 --date=12/11/2020', () => {
     response.should.match(/Cafétéria BC/);
     nextCliOption = ['--restoId=bo', '--date=18/04/2019'];
   });
