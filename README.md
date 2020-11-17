@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/innovativeinnovation/eat-at-epfl">
-    <img alt="Travis Status" src="https://travis-ci.org/innovativeinnovation/eat-at-epfl.svg?branch=master">
+  <a href="https://travis-ci.com/innovativeinnovation/eat-at-epfl">
+    <img alt="Travis Status" src="https://travis-ci.com/innovativeinnovation/eat-at-epfl.svg?branch=master">
   </a>
   <a href="https://david-dm.org/innovativeinnovation/eat-at-epfl">
     <img alt="Dependencies Status" src="https://david-dm.org/innovativeinnovation/eat-at-epfl/status.svg"/>
