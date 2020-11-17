@@ -1,6 +1,12 @@
 Changelog
 =========
 
+### v2.1.2 / 2020-11-17
+
+  - Update dependencies
+  - Test against Node.js 15
+  - Migrate travis-ci.org to .com
+
 ### v2.1.1 / 2020-07-09
 
   - Update dependencies
