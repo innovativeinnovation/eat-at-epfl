@@ -29,30 +29,30 @@ describe('eat-at-epfl cli', function () {
 
   it('should match "Usage:" with option --date=30/02/2019', () => {
     response.should.match(/Usage:/);
-    nextCliOption = ['--date=08/04/2021'];
+    nextCliOption = ['--date=26/08/2021'];
   });
 
-  it('should match "L\'Arcadie" with -d 08/04/2021', () => {
+  it('should match "L\'Arcadie" with -d 26/08/2021', () => {
     response.should.match(/L'Arcadie/);
-    nextCliOption = ['-e', '--date=08/04/2021'];
+    nextCliOption = ['-e', '--date=26/08/2021'];
   });
 
-  it('should match "Sushizen" with -d 08/04/2021 -e', () => {
+  it('should match "Sushizen" with -d 26/08/2021 -e', () => {
     response.should.match(/Sushizen/);
-    nextCliOption = ['-e', '--language=fr', '--date=08/04/2021'];
+    nextCliOption = ['-e', '--language=fr', '--date=25/08/2021'];
   });
 
-  it('should match "Chirashi" with -d 08/04/2021 -e -l fr', () => {
-    response.should.match(/Chirashi/);
-    nextCliOption = ['--tags=Viande', '--date=08/04/2021'];
+  it('should match "teriyaki" with -d 25/08/2021 -e -l fr', () => {
+    response.should.match(/teriyaki/);
+    nextCliOption = ['--tags=Viande', '--date=26/08/2021'];
   });
 
-  it('should match "Lamb chawarma" with -d 08/04/2021 -t Viande', () => {
+  it('should match "Lamb chawarma" with -d 26/08/2021 -t Viande', () => {
     response.should.match(/Lamb chawarma/);
-    nextCliOption = ['--restoId=14', '--date=08/04/2021'];
+    nextCliOption = ['--restoId=14', '--date=25/08/2021'];
   });
 
-  it('should match "Hong Thaï Rung" with -r 14 --date=08/04/2021', () => {
+  it('should match "Hong Thaï Rung" with -r 14 --date=25/08/2021', () => {
     response.should.match(/Hong Thaï Rung/);
     nextCliOption = ['--restoId=bo', '--date=18/04/2019'];
   });
